@@ -327,7 +327,7 @@ public class QuarterClassTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //getFirstMillisecond
 
-    @Test public void testgetFirstMillisecond() {
+    @Test public void testGetFirstMillisecond() {
         arrange();
 
         // Current quarter
@@ -378,7 +378,7 @@ public class QuarterClassTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //getLastMillisecond
 
-    @Test public void getLastMillisecond() {
+    @Test public void testGetLastMillisecond() {
         arrange();
 
         // Current quarter
@@ -429,7 +429,7 @@ public class QuarterClassTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //parseQuarter
 
-    @Test public void parseQuarter() {
+    @Test public void testParseQuarter() {
         arrange();
 
         // Current quarter
