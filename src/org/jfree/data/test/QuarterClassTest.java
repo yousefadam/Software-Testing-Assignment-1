@@ -3,6 +3,7 @@ package org.jfree.data.test;
 import org.jfree.data.time.Quarter;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
+
 import org.junit.Test;
 
 import java.util.Date;
@@ -262,4 +263,18 @@ public class QuarterClassTest {
         Quarter quarter2 = new Quarter(1,2009);
         assertEquals(14, quarter.compareTo(quarter2));
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //toString
+
+    @Test
+    public void testToString() {
+        arrange();
+        // Current quarter, current year
+        Quarter quarter2 = new Quarter();
+        assertEquals("Q2/2023",quarter2.toString());
+    }
+
+    
+
 }
