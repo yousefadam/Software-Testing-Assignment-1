@@ -270,11 +270,192 @@ public class QuarterClassTest {
     @Test
     public void testToString() {
         arrange();
+
         // Current quarter, current year
         Quarter quarter2 = new Quarter();
-        assertEquals("Q2/2023",quarter2.toString());
+        assertEquals("Q2/2023", quarter2.toString());
+
+        // prev quarter, current year
+        quarter2 = new Quarter(1, 2023);
+        assertEquals("Q1/2023", quarter2.toString());
+
+        // Next quarter, current year
+        quarter2 = new Quarter(3,2023);
+        assertEquals("Q3/2023", quarter2.toString());
+
+        // Past
+        quarter2 = new Quarter(4,1994);
+        assertEquals("Q4/1994", quarter2.toString());
+
+        // Upcoming
+        quarter2 = new Quarter(2,2025);
+        assertEquals("Q2/2025", quarter2.toString());
     }
 
+    /*@Test
+    public void testToString2() {
+        arrange();
+        // prev quarter, current year
+        Quarter quarter2 = new Quarter(1, 2023);
+        assertEquals("Q1/2023", quarter2.toString());
+    }
     
+    @Test
+    public void testToString3() {
+        arrange();
+        // Next quarter, current year
+        Quarter quarter2 = new Quarter(3,2023);
+        assertEquals("Q3/2023", quarter2.toString());
+    }
+
+    @Test
+    public void testToString4() {
+        arrange();
+        // Past
+        Quarter quarter2 = new Quarter(4,1994);
+        assertEquals("Q4/1994", quarter2.toString());
+    }
+
+    @Test
+    public void testToString5() {
+        arrange();
+        // Upcoming
+        Quarter quarter2 = new Quarter(2,2025);
+        assertEquals("Q2/2025", quarter2.toString());
+    }*/
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //getFirstMillisecond
+
+    @Test public void testgetFirstMillisecond() {
+        arrange();
+
+        // Current quarter
+        Quarter quarter2 = new Quarter();
+        assertEquals(1680300000000L, quarter2.getFirstMillisecond());
+
+        // Next quarter
+        quarter2 = new Quarter(3,2023);
+        assertEquals(1688162400000L, quarter2.getFirstMillisecond());
+
+        // Prev Quarter
+        quarter2 = new Quarter(1,2023);
+        assertEquals(1672524000000L, quarter2.getFirstMillisecond());
+
+        // Upcoming
+        quarter2 = new Quarter(4,2029);
+        assertEquals(1885500000000L, quarter2.getFirstMillisecond());
+
+        // Past
+        quarter2 = new Quarter(2,2000);
+        assertEquals(954540000000L, quarter2.getFirstMillisecond());
+    }
+
+    /*@Test public void testgetFirstMillisecond2() {
+        arrange();
+        Quarter quarter2 = new Quarter(3,2023);
+        assertEquals(1688162400000L, quarter2.getFirstMillisecond());
+    }
+
+    @Test public void testgetFirstMillisecond3() {
+        arrange();
+        Quarter quarter2 = new Quarter(1,2023);
+        assertEquals(1672524000000L, quarter2.getFirstMillisecond());
+    }
+
+    @Test public void testgetFirstMillisecond4() {
+        arrange();
+        Quarter quarter2 = new Quarter(4,2029);
+        assertEquals(1885500000000L, quarter2.getFirstMillisecond());
+    }
+
+    @Test public void testgetFirstMillisecond5() {
+        arrange();
+        Quarter quarter2 = new Quarter(2,2000);
+        assertEquals(954540000000L, quarter2.getFirstMillisecond());
+    }*/
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //getLastMillisecond
+
+    @Test public void getLastMillisecond() {
+        arrange();
+
+        // Current quarter
+        Quarter quarter2 = new Quarter();
+        assertEquals(1688162399999L, quarter2.getLastMillisecond());
+
+        // Next quarter
+        quarter2 = new Quarter(3,2023);
+        assertEquals(1696111199999L, quarter2.getLastMillisecond());
+
+        // Prev Quarter
+        quarter2 = new Quarter(1,2023);
+        assertEquals(1680299999999L, quarter2.getLastMillisecond());
+
+        // Upcoming
+        quarter2 = new Quarter(4,2029);
+        assertEquals(1893448799999L, quarter2.getLastMillisecond());
+
+        // Past
+        quarter2 = new Quarter(2,2000);
+        assertEquals(962398799999L, quarter2.getLastMillisecond());
+    }
+
+    /*@Test public void getLastMillisecond2() {
+        arrange();
+        Quarter quarter2 = new Quarter(3,2023);
+        assertEquals(1696111199999L, quarter2.getLastMillisecond());
+    }
+
+    @Test public void getLastMillisecond3() {
+        arrange();
+        Quarter quarter2 = new Quarter(1,2023);
+        assertEquals(1680299999999L, quarter2.getLastMillisecond());
+    }
+
+    @Test public void getLastMillisecon4() {
+        arrange();
+        Quarter quarter2 = new Quarter(4,2029);
+        assertEquals(1893448799999L, quarter2.getLastMillisecond());
+    }
+
+    @Test public void getLastMillisecond5() {
+        arrange();
+        Quarter quarter2 = new Quarter(2,2000);
+        assertEquals(962398799999L, quarter2.getLastMillisecond());
+    }*/
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //parseQuarter
+
+    @Test public void parseQuarter() {
+        arrange();
+
+        // Current quarter
+        Quarter quarter2 = new Quarter();
+        assertEquals(quarter2, Quarter.parseQuarter("Q2-2023"));
+        assertEquals(quarter2, Quarter.parseQuarter("2023-Q2")); // Year (-) quarter
+        assertEquals(quarter2, Quarter.parseQuarter("2023 Q2")); // Year ( ) quarter
+        assertEquals(quarter2, Quarter.parseQuarter("2023/Q2")); // Year (/) quarter
+        assertEquals(quarter2, Quarter.parseQuarter("2023,Q2")); // Year (,) quarter
+
+        // Next quarter
+        quarter2 = new Quarter(3,2023);
+        assertEquals(quarter2, Quarter.parseQuarter("Q3-2023")); // Quarter (-) year
+
+        // Prev Quarter
+        quarter2 = new Quarter(1,2023);
+        assertEquals(quarter2, Quarter.parseQuarter("Q1 2023")); // Quarter ( ) year
+
+        // Upcoming
+        quarter2 = new Quarter(4,2050);
+        assertEquals(quarter2, Quarter.parseQuarter("2050/Q4")); // Quarter (/) year
+
+        // Past
+        quarter2 = new Quarter(2,1998);
+        assertEquals(quarter2, Quarter.parseQuarter("1998,Q2")); // Quarter (,) year
+
+    }
 
 }
