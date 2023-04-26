@@ -397,6 +397,12 @@ public class QuarterClassTest {
         assertEquals(1688194799999L, quarter2.getLastMillisecond(TimeZone.getTimeZone("America/Los_Angeles")));
         assertEquals(1688162399999L, quarter2.getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo")));
 
+        // First, Last milliSeconds of a quarter are not equal
+        assertNotEquals(
+            quarter2.getFirstMillisecond(TimeZone.getTimeZone("Africa/Cairo")), 
+            quarter2.getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo"))
+            );
+
         // Different Quarters, same time zone
         assertNotEquals(
             quarter2.getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo")), 
