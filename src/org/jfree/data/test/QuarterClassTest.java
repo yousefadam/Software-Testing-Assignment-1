@@ -6,6 +6,7 @@ import org.jfree.data.time.Year;
 
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -333,6 +334,14 @@ public class QuarterClassTest {
         // Current quarter
         Quarter quarter2 = new Quarter();
         assertEquals(1680300000000L, quarter2.getFirstMillisecond());
+        assertEquals(1680332400000L, quarter2.getFirstMillisecond(TimeZone.getTimeZone("America/Los_Angeles")));
+        assertEquals(1680300000000L, quarter2.getFirstMillisecond(TimeZone.getTimeZone("Africa/Cairo")));
+
+        // Different Quarters, same time zone
+        assertNotEquals(
+            quarter2.getFirstMillisecond(TimeZone.getTimeZone("Africa/Cairo")), 
+            new Quarter(1,2023).getFirstMillisecond(TimeZone.getTimeZone("Africa/Cairo"))
+            );
 
         // Next quarter
         quarter2 = new Quarter(3,2023);
@@ -349,6 +358,7 @@ public class QuarterClassTest {
         // Past
         quarter2 = new Quarter(2,2000);
         assertEquals(954540000000L, quarter2.getFirstMillisecond());
+
     }
 
     /*@Test public void testgetFirstMillisecond2() {
@@ -384,6 +394,14 @@ public class QuarterClassTest {
         // Current quarter
         Quarter quarter2 = new Quarter();
         assertEquals(1688162399999L, quarter2.getLastMillisecond());
+        assertEquals(1688194799999L, quarter2.getLastMillisecond(TimeZone.getTimeZone("America/Los_Angeles")));
+        assertEquals(1688162399999L, quarter2.getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo")));
+
+        // Different Quarters, same time zone
+        assertNotEquals(
+            quarter2.getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo")), 
+            new Quarter(1,2023).getLastMillisecond(TimeZone.getTimeZone("Africa/Cairo"))
+            );
 
         // Next quarter
         quarter2 = new Quarter(3,2023);
